@@ -1,5 +1,6 @@
 #include <iostream>
 #include "stock_class.h"
+//version 1.2
 using namespace std;
 int main()
 {
@@ -18,6 +19,12 @@ int main()
     cout << "---new an object--- \n";
     class stock *pstock = new stock("Huichuan" , 100000, 52.14); //destructor will be called.
     pstock->show();
+    cout << "20200925****************************\n";
+    stock obj1("zte", 1000, 56.14);
+    obj1.show();
+    stock obj2("zte", 500, 50.09);
+    obj2.show();
+    (obj1.topval(obj2)).show();
     /*Mark.acquire("ZTE(SH)", 1000, 33.21);
     Mark.show();
     Mark.sell(500, 34.77);

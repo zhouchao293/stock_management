@@ -1,5 +1,5 @@
-//stock00.h --stock class
-//version 00
+//stock1.2.h --stock class
+//version 1.2
 #ifndef STOCK_CLASS_H_
 #define STOCK_CLASS_H_
 
@@ -16,7 +16,7 @@ class stock
 
     public:
         stock();//declare default constructor
-        stock(const std::string & co, long num=0, double price = 0.0);
+        stock(const std::string & co, long num=0, double pr = 0.0);
         ~stock();//declare destructor
         void set_total_val();
         void update_total_val(double pr);
@@ -24,7 +24,8 @@ class stock
         void buy(long num, double price);
         void sell(long num, double price);
         void update(double price);
-        void show();
+        void show() const;//"const" indicates that function "show()" cannot change the properties of object.
+        const stock & topval(const stock & s) const;
 };
 
 #endif

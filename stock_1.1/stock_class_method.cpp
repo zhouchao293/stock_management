@@ -1,5 +1,5 @@
 //stock_class_method.cpp -- implementing method of stock class
-//version 00
+//version 1.2
 #include <iostream>
 #include "stock_class.h"
 using namespace std;
@@ -16,15 +16,6 @@ stock::stock()  //default constructor
 stock::stock(const std::string & co, long num, double pr)//a different constructor.
 {
     cout << "constructor using " << co << " called\n";
-    company = co;
-    if(num < 0)
-    {
-        cout << "the num of your share shouldn't be negative."
-             << company << "shares set to 0.\n";
-    }
-    else
-        shares = num;
-    update_total_val(pr);
     company = co;
     if(num < 0)
     {
@@ -101,11 +92,30 @@ void stock::sell(long num, double pr)
     }
 }
 
-void stock::show()
+void stock::show() const
 {
+    using std::cout;
+    using std::ios_base;
+    //set format to X.XXX
+    ios_base::fmtflags ori = cout.setf(ios_base::fixed, ios_base::floatfield);
+    std::streamsize pre = cout.precision(3);
+
     cout << "company:" << company <<'\n'
          << "shares:"  << shares <<'\n'
-         << "price:"   << price <<'\n'
-         << "total_val:$" << total_val <<'\n';
+         << "price:"   << price <<'\n';
+    //set format to X.XX
+    cout.precision(2);
+    cout << "total_val:$" << total_val <<'\n';
+    //restore original format
+    cout.setf(ori, ios_base::floatfield);
+    cout.precision(ori);
+}
+
+const stock & stock::topval(const stock & s) const
+{
+    if(s.total_val >= total_val)
+        return s;
+    else
+        return *this;//return the object that is calling function topval()now.
 }
 
